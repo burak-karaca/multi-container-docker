@@ -1,0 +1,33 @@
+{
+	"AWSEBDockerrunVersion": 2,
+	"containerDefinitions": [{
+			"name": "client",
+			"image": "burakaraca/multi-client",
+			"hostname": "client",
+			"essential": false
+		},
+		{
+			"name": "server",
+			"image": "burakaraca/multi-server",
+			"hostname": "api",
+			"essential": false
+		},
+		{
+			"name": "worker",
+			"image": "burakaraca/multi-worker",
+			"hostname": "worker",
+			"essential": false
+		},
+		{
+			"name": "nginx",
+			"image": "burakaraca/multi-nginx",
+			"hostname": "nginx",
+			"essential": true,
+			"portMappings": [{
+				"hostPort": 80,
+				"containerPort": 80
+			}],
+			"links": ["client", "server"]
+		}
+	]
+}
